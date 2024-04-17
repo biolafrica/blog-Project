@@ -1,0 +1,62 @@
+<%- include('./partials/head.ejs') %>
+  <body>
+
+    <div class="container">
+
+      <%- include('./partials/search.ejs') %>      
+      <%- include('./partials/nav.ejs') %>
+      <%- include('./partials/header.ejs') %>
+
+
+      <form class="form" action="">
+
+        <div class="form-heading">
+          <h3>Edit Post</h3>
+        </div>
+        
+        <label for="blog-title"><b>Title:</b></label>
+        <input type="text" placeholder="enter blog title" id="blog-title" name="blogTitle" value="<%= data.title %>">
+
+        <label for="blog-body"><b>Body:</b></label>
+        <textarea name="blogBody" id="blog-body" cols="50" rows="10"><%= data.body %></textarea>
+
+        <button class="btn">Submit</button>
+      </form>
+
+      <%- include('./partials/footer.ejs') %> 
+    </div>
+
+    <script>
+      (function PostEdit(){
+        "use strict"
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", async(e)=>{
+          e.preventDefault();
+          const title = form.blogTitle.value;
+          const body = form.blogBody.value;
+
+          try {
+            const res = await fetch("", {
+              method : "put",
+              body : JSON.stringify({title,body}),
+              headers : {"content-Type" : "application/json"}
+            })
+
+            const data = await res.json();
+            console.log(data);
+            if(data.id){
+              location.assign("/admin/home")
+            }
+            
+          } catch (error) {
+            
+          }
+        })
+
+      }())
+
+    </script>
+    
+  </body>
+</html>

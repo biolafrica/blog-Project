@@ -1,0 +1,65 @@
+<%- include('./partials/head.ejs') %>
+  <body>
+    <div class="container">
+
+      <%- include('./partials/search.ejs') %>
+      <%- include('./partials/nav.ejs') %>
+      <%- include('./partials/header.ejs') %>
+
+      <form class="form create" action="">
+
+        <h3>Add Blog</h3>
+
+        <label for=""><b>Title:</b></label>
+        <input type="text" placeholder="Blog title" name="title">
+
+        <label for=""><b>Body:</b></label>
+        <textarea name="body" cols="30" rows="10" placeholder="Blog body"></textarea>
+
+
+        <button class="btn">submit</button>
+
+      </form>
+     
+
+      <%- include('./partials/footer.ejs') %>  
+      
+    </div>
+
+
+    <script>
+
+      (function postAdd(){
+        "use strict"
+        const form = document.querySelector(".form.create");
+        form.addEventListener("submit", async(e)=>{
+          e.preventDefault();
+          const title = form.title.value;
+          const body = form.body.value;
+          try {
+            const res = await fetch("/admin/create", {
+              method : "POST",
+              body : JSON.stringify({title, body}),
+              headers: {"content-Type" : "application/json"}
+
+            }); 
+
+            const data = await res.json();
+            console.log(data);
+            if(data.id){
+              location.assign("/admin/home")
+            } 
+            
+          } catch (error) {
+            console.log(error)
+            
+          }
+
+        })
+
+      }());
+      
+    </script>
+    
+  </body>
+</html>

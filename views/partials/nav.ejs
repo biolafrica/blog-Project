@@ -1,0 +1,30 @@
+<div class="menu-container menu-containerjs">
+
+  <div class="header">
+    <div class="header__left">
+      <a href="/" class="logo">Eatup Blog</a>
+    </div>
+
+    <div class="header__right">
+      <a href="#" class="searchjs search"><img src="/images/Search.svg" alt="search icon"></a>
+
+      <a href="#" class="cancel nav"><img src="/images/Clear.svg" alt="cancel icon"></a>
+    </div>
+
+  </div>
+
+  <div class="sub-main sub-mainjs">
+    <%if(admin === null){%>
+      <a href="/" >Home</a>
+      <a href="/about">About</a>
+
+    <%}else{%>
+
+      <a href="/" >Home</a>
+      <a href="/about">About</a>
+      <a href="/admin/logout">Logout</a>
+
+    <%}%>
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+<%- include('./partials/head.ejs') %>
+  <body>
+    <div class="container">
+
+      <%- include('./partials/search.ejs') %>
+      <%- include('./partials/nav.ejs') %>
+      <%- include('./partials/header.ejs') %>
+
+
+      <h1 class="search-text">Search Results for : <span style="color: #000000E0;" id="searchedValue">'<%= search %>'</span></h1>
+
+      <div class="recent-card" id="searchDisplay">
+        <%if(data.length > 0){%>
+          <%data.forEach((item)=>{%>
+            <a class="card-container" href="/<%= item._id %>">
+              <div class="card-image">
+                <img src="/images/unsplash_e5Q5vWO55uU.png" alt="restaurant owner image">
+              </div>
+              <div class="card-body">
+                <h2><%= item.title %></h2>
+                <h3><%= item.createdAt.toDateString() %></h3>
+              </div>
+            </a>
+
+          <%})%>
+
+        <%}else{%>
+          <h3 style="margin: auto;">Search result not found</h3>
+        <%}%>
+        
+        
+
+        
+
+      </div>
+
+      <%- include('./partials/footer.ejs') %> 
+
+      
+  
+    </div>
+    
+  </body>
+</html>

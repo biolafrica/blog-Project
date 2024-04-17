@@ -1,0 +1,69 @@
+<%- include('./partials/head.ejs') %>
+  <body>
+    <div class="container">
+
+      <%- include('./partials/search.ejs') %>
+      <%- include('./partials/nav.ejs') %>
+      <%- include('./partials/header.ejs') %>
+
+
+      <div class="topic">
+        <h1><%= post.title %></h1>
+        <h3><%= post.createdAt.toDateString() %></h3>
+        <div class="share-link share-linkjs">
+          share on 
+          <span>
+            <img src="/images/facebook_symbol_fill.svg" alt="facebook icon" id="fb-icon">
+            <img src="/images/linkedin_symbol_fill.svg" alt="linkedIn icon" id="linkedIn-icon">
+            <a><img src="/images/x_logo_fill.svg" alt="twitter icon" id="twitter-icon"></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="blog-body">
+        <div class="image-body">
+          <img src="/images/unsplash_e5Q5vWO55uU.png" alt="restaurant owner image">
+        </div>
+        <div class="content-body">
+         <%= post.body %>
+        </div>
+      </div>
+
+      <div class="blog-recent"> 
+        <div class="blog-recent-post">
+          <h3>Recent post</h3>
+
+          <div class="recent-card">
+            <% 
+            data.forEach((item, i)=>{%>
+              <%  if(item.title !== post.title && i < 3){%>
+                <a class="card-container" href="/<%= item._id %>">
+                  <div class="card-image">
+                    <img src="/images/unsplash_e5Q5vWO55uU.png" alt="restaurant owner image">
+                  </div>
+                  <div class="card-body">
+                    <h2><%= item.title %></h2>
+                    <h3><%= item.createdAt.toDateString() %></h3>
+                  </div>
+                </a>
+                
+              <%}%>
+              
+            <%})%>
+
+           
+          </div>
+        </div>
+
+      </div>
+
+      <%- include('./partials/footer.ejs') %>  
+    
+
+    </div>
+
+    
+     
+    
+  </body>
+</html>

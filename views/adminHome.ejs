@@ -1,0 +1,51 @@
+<%- include('./partials/head.ejs') %>
+  <body>
+    <div class="container">
+
+      <%- include('./partials/search.ejs') %>      
+      <%- include('./partials/nav.ejs') %>
+      <%- include('./partials/header.ejs') %>
+
+
+
+      <div class="new-post">
+        <h3>Post</h3>
+        <a href="/admin/create">+Add new</a>
+      </div>
+
+      <div>
+        
+        <%if(post.length > 0){%>
+          <%post.forEach((item)=>{%>
+            <div class="post-list">
+              <div class="post-text">
+                <%= item.title %>
+              </div>
+      
+              <div class="post-buttons">
+                <a href="/admin/edit/<%= item._id %>" class="btn">Edit</a>
+                <a href="/admin/delete/<%= item._id %>" class="btn">Delete</a>
+              </div>
+      
+            </div>
+
+          <%})%>
+        <%}else{%>
+          <div>
+            <h4 style="text-align: center;">
+              No blog post is available
+            </h4>
+          </div>
+        <%}%>
+       
+
+      </div>
+      
+     
+
+      <%- include('./partials/footer.ejs') %>  
+
+    </div>
+    
+  </body>
+</html>
