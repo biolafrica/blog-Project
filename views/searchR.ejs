@@ -14,7 +14,7 @@
           <%data.forEach((item)=>{%>
             <a class="card-container" href="/<%= item._id %>">
               <div class="card-image">
-                <img src="/images/unsplash_e5Q5vWO55uU.png" alt="restaurant owner image">
+                <img src="<%= item.imageUrl %>">
               </div>
               <div class="card-body">
                 <h2><%= item.title %></h2>

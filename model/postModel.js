@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
     type : String,
     required : [true,"Kindly add a body"]
   },
-  imgUrl : {
+  imageUrl : {
     type : String,
     required : [true,"Kindly add an image"]
   },

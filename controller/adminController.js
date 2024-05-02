@@ -2,8 +2,9 @@ const User = require("../model/userModel");
 const jwt = require("jsonwebtoken");
 const Post = require("../model/postModel");
 const multer = require("multer");
-const {cloudinaryStorage, CloudinaryStorage} = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
+const {CloudinaryStorage} = require("multer-storage-cloudinary");
+
 
 //configure cloudinary
 const {cloud_name, api_key, api_secret} = process.env;
@@ -17,8 +18,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary : cloudinary,
   params: {
-    folder: "uploads",
-    allowed_formats: ["jpg", "jpeg", "png"]
+    folder: "eatupBlogs",
+    allowed_formats: ["jpg", "jpeg", "png"],
+   
   }
 });
 
@@ -171,17 +173,24 @@ const adminCreateGet = (req, res)=>{
 }
 
 const adminCreatePost = async(req, res)=>{
-  
-  try {
-    const {body, title} = req.body;
-    const result = await Post.create({body,title});
-    res.status(201).json({id: result.id});
-    
-  } catch (error) {
-    console.log(error)
-    
-  }
+  upload.single("image")(req,res, async(err)=>{
+    if(err){
+      console.error("Error uploading file:", err);
+      return res.status(400).json({error : "Error uploading file"});
+    }
 
+    try {
+      const {body, title,} = req.body;
+      const imageUrl = req.file ? req.file.path : null;
+      const result = await Post.create({body,title, imageUrl});
+      res.status(201).json({id: result.id});
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+  })
+  
 }
 
 const adminEditGet = async(req, res)=>{
