@@ -6,12 +6,15 @@
       <%- include('./partials/nav.ejs') %>
       <%- include('./partials/header.ejs') %>
 
-      <form class="form create" action="">
+      <form class="form create" action="" enctype="multipart/form-data">
 
         <h3>Add Blog</h3>
 
         <label for=""><b>Title:</b></label>
-        <input type="text" placeholder="Blog title" name="title">
+        <input type="text" placeholder="Blog title" name="title" required>
+
+        <label for=""><b>image:</b></label>
+        <input type="file" placeholder="Blog Image" name="image" required>
 
         <label for=""><b>Body:</b></label>
         <textarea name="body" cols="30" rows="10" placeholder="Blog body"></textarea>
@@ -36,10 +39,11 @@
           e.preventDefault();
           const title = form.title.value;
           const body = form.body.value;
+          const image = form.image.value;
           try {
             const res = await fetch("/admin/create", {
               method : "POST",
-              body : JSON.stringify({title, body}),
+              body : JSON.stringify({title, body, image}),
               headers: {"content-Type" : "application/json"}
 
             }); 

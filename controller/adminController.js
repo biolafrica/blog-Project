@@ -1,7 +1,17 @@
 const User = require("../model/userModel");
 const jwt = require("jsonwebtoken");
 const Post = require("../model/postModel");
-const {protectRoute} = require("../Middleware/auth");
+const multer = require("multer");
+const {cloudinaryStorage} = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
+
+//configure cloudinary
+const {cloud_name, api_key, api_secret} = process.env;
+cloudinary.config({
+  cloud_name,
+  api_key,
+  api_secret
+});
 
 
 const maxAge = 3*24*60*60;

@@ -9,6 +9,10 @@ const postSchema = new mongoose.Schema({
     type : String,
     required : [true,"Kindly add a body"]
   },
+  imgUrl : {
+    type : String,
+    required : [true,"Kindly add an image"]
+  },
   createdAt :{
     type : Date,
     default : Date.now

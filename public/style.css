@@ -24,7 +24,6 @@ body{
   font-family: "Roboto", sans-serif;
   color: var(--text);
   font-size: var(--font-size-base);
-  
 }
 
 img{
@@ -68,8 +67,10 @@ textarea{
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background-color: var(--layout-background);
+  background-color: var(--);
 }
+
+
 
 .btn:hover{
   filter: brightness(0.9);

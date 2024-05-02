@@ -8,7 +8,6 @@ const Post = require("./model/postModel");
 const cookieParser = require('cookie-parser');
 const {checkAdmin} = require("./Middleware/auth");
 
-
 //setup express app
 const app = express();
 
@@ -21,13 +20,15 @@ app.use(cookieParser());
 // connect to database
 const URI = process.env.MongoDB_URI;
 mongoose.connect(URI)
-.then(result => app.listen(3000))
+.then(result => console.log("connected to the database"))
 .catch(error => console.log(error));
 
+app.listen(3000, ()=>{
+  console.log("connected to the server")
+});
 
 //setup view engine
 app.set("view engine", "ejs");
-
 
 app.get("*", checkAdmin);
 app.post("*", checkAdmin);
