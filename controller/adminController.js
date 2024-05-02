@@ -2,7 +2,7 @@ const User = require("../model/userModel");
 const jwt = require("jsonwebtoken");
 const Post = require("../model/postModel");
 const multer = require("multer");
-const {cloudinaryStorage} = require("multer-storage-cloudinary");
+const {cloudinaryStorage, CloudinaryStorage} = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
 
 //configure cloudinary
@@ -12,6 +12,17 @@ cloudinary.config({
   api_key,
   api_secret
 });
+
+//setup multer for storage
+const storage = new CloudinaryStorage({
+  cloudinary : cloudinary,
+  params: {
+    folder: "uploads",
+    allowed_formats: ["jpg", "jpeg", "png"]
+  }
+});
+
+const upload = multer({storage : storage});
 
 
 const maxAge = 3*24*60*60;
